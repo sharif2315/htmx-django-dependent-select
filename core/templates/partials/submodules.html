@@ -1,0 +1,8 @@
+<div id="submodules">
+    <select class="custom-select mb-4" name="course">
+        <option selected>Open this select menu</option>
+        {% for submodule in submodules %}
+            <option value="{{submodule.pk}}">{{ submodule.name }}</option>
+        {% endfor %}
+    </select>
+</div>
