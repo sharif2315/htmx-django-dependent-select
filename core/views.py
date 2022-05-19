@@ -1,12 +1,25 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.urls import path
+
 from .models import Course, Module, Submodule
+from .forms import UniversityForm
+
+def courses_view(request):
+    form = UniversityForm()
+    context = {'form': form}
+    return render(request, 'university.html', context)
 
 
 def courses(request):
     courses = Course.objects.all()
     context = {'courses': courses}
     return render(request, 'university.html', context)
+
+
+def modules_view(request):
+    form = UniversityForm(request.GET)
+    return HttpResponse(form['modules'])
 
 
 def modules(request):
@@ -18,6 +31,11 @@ def modules(request):
 
     except ValueError:
         return render(request, 'partials/modules.html')
+
+
+def submodules_view(request):
+    form = UniversityForm(request.GET)
+    return HttpResponse(form['submodules'])
 
 
 def submodules(request):

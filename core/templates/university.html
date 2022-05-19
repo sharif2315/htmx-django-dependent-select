@@ -1,7 +1,12 @@
 {% extends 'base.html' %} 
+{% load widget_tweaks %}
 
 {% block content %}
-<select class="custom-select mb-4" name="course"
+
+{{ form.course.label_tag }}
+{% render_field form.course class='custom-select mb-4' autocomplete="off" hx-get="/modules/" hx-target="#id_modules" %}
+
+<!-- <select class="custom-select mb-4" name="course"
         hx-get="{% url 'modules' %}"
         hx-target="#modules"
         hx-indicator=".htmx-indicator">
@@ -11,9 +16,15 @@
     {% for course in courses %}
         <option value="{{course.pk}}">{{ course.name }}</option>
     {% endfor %}
-</select>
+</select> -->
 
-<div id="modules">
+{{ form.modules.label_tag }}
+{% render_field form.modules class='custom-select mb-4' hx-get="/submodules/" hx-target="#id_submodules" %}
+
+{{ form.submodules.label_tag }}
+{% render_field form.submodules class='custom-select mb-4' %}
+
+{% comment %} <div id="modules">
     {% include 'partials/modules.html' %}
-</div>
+</div> {% endcomment %}
 {% endblock %}
